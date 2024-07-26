@@ -61,5 +61,21 @@ const getTasks =async(req, res)=>{
     }
  }
 
+ // Delete Task - DELETE
 
-export {createTask, getTasks, getSingleTask, updateTask}
+ const deleteTask = async(req,res)=>{
+    const id = req.params.id;
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({Errormessage:'Task Not Found'})
+    }
+    try{
+        const task = await taskModels.findByIdAndDelete(id);
+        res.status(200).json(task)
+    }
+    catch(err){
+        res.status(400).json({error:err.message});
+    }
+ }
+
+
+export {createTask, getTasks, getSingleTask, updateTask, deleteTask}
