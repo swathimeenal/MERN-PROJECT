@@ -18,7 +18,7 @@ app.use((req,res,next)=>{
 app.use("/api/tasks",router)
 
 //db connection
-const  Connection = async () => {
+const  Connection = async() => {
     try{
         mongoose.connect(process.env.MONGO_URL)
         app.listen(process.env.PORT,()=>{
